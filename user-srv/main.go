@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"micro-simple/basic"
 	"micro-simple/basic/config"
-	"micro-simple/user-service/handler"
-	"micro-simple/user-service/model"
+	"micro-simple/user-srv/handler"
+	"micro-simple/user-srv/model"
 
-	s "micro-simple/user-service/proto/user"
+	s "micro-simple/user-srv/proto/user"
 
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"

@@ -2,7 +2,7 @@ package user
 
 import (
 	"fmt"
-	proto "micro-simple/user-service/proto/user"
+	proto "micro-simple/user-srv/proto/user"
 	"sync"
 )
 

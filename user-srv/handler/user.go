@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 	"log"
-	u "micro-simple/user-service/model/user"
-	s "micro-simple/user-service/proto/user"
+	u "micro-simple/user-srv/model/user"
+	s "micro-simple/user-srv/proto/user"
 )
 
 type Service struct{}
