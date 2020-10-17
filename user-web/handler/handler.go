@@ -3,7 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
-	us "micro-simple/user-service/proto/user"
+	us "micro-simple/user-srv/proto/user"
 	"net/http"
 	"time"
 
