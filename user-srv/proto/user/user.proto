@@ -3,8 +3,8 @@ syntax = "proto3";
 package mu.micro.book.user.srv.service;
 
 service User {
-    rpc QueryUserByName (Request) returns (Response) {
-    }
+  rpc QueryUserByName (Request) returns (Response) {
+  }
 }
 
 message user {
@@ -16,18 +16,18 @@ message user {
 }
 
 message Error {
-    int32 code = 1;
-    string detail = 2;
+  int32 code = 1;
+  string detail = 2;
 }
 
 message Request {
-    string userID = 1;
-    string userName = 2;
-    string userPwd = 3;
+  string userID = 1;
+  string userName = 2;
+  string userPwd = 3;
 }
 
 message Response {
-    bool success = 1;
-    Error error = 2;
-    user user = 3;
+  bool success = 1;
+  Error error = 2;
+  user user = 3;
 }
