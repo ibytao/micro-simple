@@ -6,7 +6,7 @@ import (
 	proto "micro-simple/orders-srv/proto/orders"
 	"sync"
 
-	"github.com/micro/go-micro/client"
+	"github.com/micro/go-micro/v2/client"
 )
 
 var (

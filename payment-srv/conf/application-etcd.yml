@@ -1,0 +1,5 @@
+app:
+  etcd:
+    enabled: true
+    host: 141.164.54.150
+    port: 2379

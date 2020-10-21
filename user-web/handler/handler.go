@@ -3,6 +3,8 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+	"micro-simple/plugins/session"
 	us "micro-simple/user-srv/proto/user"
 	"net/http"
 	"time"
@@ -77,6 +79,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		expire := time.Now().Add(30 * time.Minute)
 		cookie := http.Cookie{Name: "remember-me-token", Value: rsp2.Token, Path: "/", Expires: expire, MaxAge: 90000}
 		http.SetCookie(w, &cookie)
+
+		// 同步到session中
+		sess := session.GetSession(w, r)
+		sess.Values["userId"] = rsp.User.Id
+		sess.Values["userName"] = rsp.User.Name
+		_ = sess.Save(r, w)
+		fmt.Printf("保存新的session： %s", sess.Values)
 
 	} else {
 		response["success"] = false
