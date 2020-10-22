@@ -1,8 +1,8 @@
 package orders
 
 import (
-	"micro-simple/basic/db"
 	proto "micro-simple/orders-srv/proto/orders"
+	"micro-simple/plugins/db"
 
 	"github.com/prometheus/common/log"
 )

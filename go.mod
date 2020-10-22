@@ -14,6 +14,7 @@ require (
 	github.com/micro/cli/v2 v2.1.2
 	github.com/micro/go-micro v1.18.0
 	github.com/micro/go-micro/v2 v2.9.1
+	github.com/micro/go-plugins/config/source/grpc/v2 v2.9.1 // indirect
 	github.com/micro/micro/v2 v2.9.3 // indirect
 	github.com/micro/protoc-gen-micro/v2 v2.3.0 // indirect
 	github.com/prometheus/common v0.6.0

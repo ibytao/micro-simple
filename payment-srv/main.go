@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"micro-simple/basic"
+	"micro-simple/basic/common"
 	"micro-simple/basic/config"
 	"micro-simple/payment-srv/handler"
 	"micro-simple/payment-srv/model"
 
 	log "github.com/micro/go-micro/v2/logger"
+	"github.com/micro/go-plugins/config/source/grpc/v2"
 
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
@@ -17,18 +19,28 @@ import (
 	s "micro-simple/payment-srv/proto/payment"
 )
 
+var (
+	appName = "payment_srv"
+	cfg     = &appCfg{}
+)
+
+type appCfg struct {
+	common.AppCfg
+}
+
 func main() {
 	// 初始化配置、数据库等信息
-	basic.Init()
+	initCfg()
 
 	// 使用etcd注册
 	micReg := etcd.NewRegistry(registryOptions)
 
 	// 新建服务
 	service := micro.NewService(
-		micro.Name("mu.micro.book.srv.payment"),
+		micro.Name(cfg.Name),
+		micro.Version(cfg.Version),
 		micro.Registry(micReg),
-		micro.Version("latest"),
+		micro.Address(cfg.Addr()),
 	)
 
 	// 服务初始化
@@ -53,6 +65,29 @@ func main() {
 }
 
 func registryOptions(ops *registry.Options) {
-	etcdCfg := config.GetEtcdConfig()
-	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.GetHost(), etcdCfg.GetPort())}
+	etcdCfg := &common.Etcd{}
+	err := config.C().App("etcd", etcdCfg)
+	if err != nil {
+		panic(err)
+	}
+
+	ops.Addrs = []string{fmt.Sprintf("%s:%d", etcdCfg.Host, etcdCfg.Port)}
+}
+
+func initCfg() {
+	source := grpc.NewSource(
+		grpc.WithAddress("127.0.0.1:9600"),
+		grpc.WithPath("micro"),
+	)
+
+	basic.Init(config.WithSource(source))
+
+	err := config.C().App(appName, cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+
+	return
 }

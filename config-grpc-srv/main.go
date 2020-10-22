@@ -9,10 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/micro/go-micro/config"
-	"github.com/micro/go-micro/config/source/file"
+	"github.com/micro/go-micro/v2/config"
+	"github.com/micro/go-micro/v2/config/source/file"
 	log "github.com/micro/go-micro/v2/logger"
 	proto "github.com/micro/go-plugins/config/source/grpc/v2/proto"
+	grpc2 "google.golang.org/grpc"
 )
 
 var (
@@ -48,7 +49,7 @@ func main() {
 	log.Info("configServer started")
 
 	//启动
-	err = service.Server(ts)
+	err = service.Serve(ts)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -81,7 +82,7 @@ func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer)
 func loadAndWatchConfigFile() (err error) {
 	// 加载每个应用的配置文件
 	for _, app := range apps {
-		if err := config.Load(file.NewSource(file.WithPath("./config/" + app + ".yml"))); err != nil {
+		if err := config.Load(file.NewSource(file.WithPath("./conf/" + app + ".yml"))); err != nil {
 			log.Fatalf("[loadAndWatchConfigFile] 加载应用配置文件 异常，%s", err)
 			return err
 		}

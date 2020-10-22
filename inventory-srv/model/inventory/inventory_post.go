@@ -3,7 +3,7 @@ package inventory
 import (
 	"fmt"
 	"micro-simple/basic/common"
-	"micro-simple/basic/db"
+	"micro-simple/plugins/db"
 
 	proto "micro-simple/inventory-srv/proto/inventory"
 

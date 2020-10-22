@@ -3,8 +3,8 @@ package orders
 import (
 	"context"
 	"micro-simple/basic/common"
-	"micro-simple/basic/db"
 	invS "micro-simple/inventory-srv/proto/inventory"
+	"micro-simple/plugins/db"
 
 	log "github.com/micro/go-micro/v2/logger"
 )

@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"micro-simple/basic/common"
-	"micro-simple/basic/db"
 	invS "micro-simple/inventory-srv/proto/inventory"
 	ordS "micro-simple/orders-srv/proto/orders"
+	"micro-simple/plugins/db"
 
 	log "github.com/micro/go-micro/v2/logger"
 )
