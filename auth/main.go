@@ -9,15 +9,18 @@ import (
 	"micro-simple/basic/common"
 	"micro-simple/basic/config"
 
+	z "micro-simple/plugins/zap"
+
 	"github.com/micro/cli/v2"
 	"github.com/micro/go-micro/v2"
-	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-plugins/config/source/grpc/v2"
+	"go.uber.org/zap"
 )
 
 var (
+	log     = z.GetLogger()
 	appName = "auth_srv"
 	cfg     = &authCfg{}
 )
@@ -57,7 +60,7 @@ func main() {
 
 	// 启动服务
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 }
@@ -86,6 +89,6 @@ func initCfg() {
 		panic(err)
 	}
 
-	log.Infof("[initCfg] 配置，cfg：%v", cfg)
+	log.Info("[initCfg] 配置", zap.Any("cfg", cfg))
 	return
 }

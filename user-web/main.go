@@ -35,10 +35,10 @@ func main() {
 	// 创建新服务
 	service := web.NewService(
 		// 后面两个web，第一个是指是web类型的服务，第二个是服务自身的名字
-		web.Name("mu.micro.book.web.user"),
-		web.Version("latest"),
+		web.Name(cfg.Name),
+		web.Version(cfg.Version),
 		web.Registry(micReg),
-		web.Address(":9000"),
+		web.Address(cfg.Addr()),
 	)
 
 	// 初始化服务
