@@ -1,4 +1,0 @@
-{"level":"info","ts":1603416425.485815,"caller":"zap/zap.go:50","msg":"[initLogger] zap plugin initializing completed"}
-{"level":"info","ts":1603416425.4868941,"caller":"auth/main.go:92","msg":"[initCfg] 配置","cfg":{"name":"mu.micro.book.srv.auth","version":"","address":"127.0.0.1","port":9030}}
-{"level":"info","ts":1603420475.701816,"caller":"zap/zap.go:50","msg":"[initLogger] zap plugin initializing completed"}
-{"level":"info","ts":1603420475.702393,"caller":"auth/main.go:92","msg":"[initCfg] 配置","cfg":{"name":"mu.micro.book.srv.auth","version":"","address":"127.0.0.1","port":9030}}
