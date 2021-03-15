@@ -46,7 +46,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Info("configServer started")
+	log.Info("configServer started: 9600")
 
 	//启动
 	err = service.Serve(ts)
