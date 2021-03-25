@@ -25,36 +25,6 @@ var (
 
 type Service struct{}
 
-func main() {
-	// 灾难恢复
-	defer func() {
-		if r := recover(); r != nil {
-			log.Info("[main] Recovered in f %v", r)
-		}
-	}()
-
-	// 加载并侦听配置文件
-	err := loadAndWatchConfigFile()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// 新建grpc Server服务
-	service := grpc2.NewServer()
-	proto.RegisterSourceServer(service, new(Service))
-	ts, err := net.Listen("tcp", ":9600")
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Info("configServer started: 9600")
-
-	//启动
-	err = service.Serve(ts)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.ReadResponse, err error) {
 	appName := parsePath(req.Path)
 
@@ -130,4 +100,34 @@ func parsePath(path string) (appName string) {
 		return paths[1]
 	}
 	return paths[0]
+}
+
+func main() {
+	// 灾难恢复
+	defer func() {
+		if r := recover(); r != nil {
+			log.Info("[main] Recovered in f %v", r)
+		}
+	}()
+
+	// 加载并侦听配置文件
+	err := loadAndWatchConfigFile()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// 新建grpc Server服务
+	service := grpc2.NewServer()
+	proto.RegisterSourceServer(service, new(Service))
+	ts, err := net.Listen("tcp", ":9600")
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Info("configServer started: 9600")
+
+	//启动
+	err = service.Serve(ts)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
